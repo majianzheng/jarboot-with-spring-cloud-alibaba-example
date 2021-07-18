@@ -1,0 +1,17 @@
+server:
+  port: 12001
+spring:
+  application:
+    name: order-server
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+      discovery:
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: ${sentinel.host:127.0.0.1:8080}
+feign:
+  sentinel:
+    enabled: true

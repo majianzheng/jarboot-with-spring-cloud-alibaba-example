@@ -1,0 +1,13 @@
+-Dloader.path=../plugins/health,../plugins/cmdb
+-Dnacos.home=./
+-Dnacos.member.list=127.0.0.1:8848,127.0.0.1:8858,127.0.0.1:8868
+-DembeddedStorage=true
+-server
+-Xms512m
+-Xmx512m
+-Xmn128m
+-XX:MetaspaceSize=128m
+-XX:MaxMetaspaceSize=128m
+-XX:-OmitStackTraceInFastThrow
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=./java_heapdump.hprof

@@ -1,0 +1,14 @@
+
+.DS_Store
+.mvn
+*.iml
+*.log
+.idea
+.vscode
+target
+dist/services/nacos-server-*/conf
+dist/services/nacos-server-*/logs
+dist/services/nacos-server-*/data
+dist/services/nacos-server-*/status
+dist/services/nacos-server-*/work
+dependency-reduced-pom.xml

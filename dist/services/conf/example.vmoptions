@@ -1,0 +1,6 @@
+-Dsentinel.host=127.0.0.1:10000
+-Xms128m
+-Xmx128m
+-XX:-OmitStackTraceInFastThrow
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=./java_heapdump.hprof

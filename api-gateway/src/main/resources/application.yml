@@ -1,0 +1,34 @@
+server:
+  port: 9900
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+      discovery:
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: ${sentinel.host:127.0.0.1:8080}
+      filter:
+        enabled: false
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: order-server
+          uri: lb://order-server
+          predicates:
+            - Path=/api/order/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+        - id: stock-server
+          uri: lb://stock-server
+          predicates:
+            - Path=/api/stock/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}

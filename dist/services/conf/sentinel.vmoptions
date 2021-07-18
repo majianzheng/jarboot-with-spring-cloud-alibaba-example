@@ -1,0 +1,6 @@
+-Dproject.name=sentinel-dashboard
+-Xms128m
+-Xmx128m
+-XX:-OmitStackTraceInFastThrow
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=./java_heapdump.hprof

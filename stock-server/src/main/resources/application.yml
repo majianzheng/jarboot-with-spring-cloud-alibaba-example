@@ -1,0 +1,18 @@
+server:
+  port: 12301
+spring:
+  application:
+    name: stock-server
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: properties
+      discovery:
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: ${sentinel.host:127.0.0.1:8080}
+feign:
+  sentinel:
+    enabled: true
