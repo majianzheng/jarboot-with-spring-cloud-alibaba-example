@@ -1,10 +1,10 @@
-# 使用Jarboot管理spring cloud alibaba系列服务的示例。
+# 使用Jarboot管理Spring Cloud Alibaba系列服务的示例。
 en: Use jarboot to manager spring cloud alibaba servers example
 
 [![CodeQL](https://github.com/majianzheng/jarboot-with-spring-cloud-alibaba-example/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/majianzheng/jarboot-with-spring-cloud-alibaba-example/actions/workflows/codeql-analysis.yml)
 ![GitHub](https://img.shields.io/github/license/majianzheng/jarboot-with-spring-cloud-alibaba-example)
 
-## 简介（brief introduction）
+## 简介（Brief introduction）
 <code>Jarboot</code> 是一个Java进程启动器，可以管理、监控及诊断一系列的Java进程。
 (en: Jarboot is a Java process starter，which can manage, monitor and debug a series of Java instance.)
 - <code>jarboot</code>: https://github.com/majianzheng/jarboot
@@ -111,8 +111,8 @@ dist                                #dist folder
 ├─shutdown.cmd
 └─services                          #Default root directory which managing other jar files (configurable)
    ├─bin
-   │  └─nacos-server.jar
-   │  └─sentinel-dashboard.jar
+   │  └─nacos-server.jar            #Nacos服务器
+   │  └─sentinel-dashboard.jar      #Sentinel管理服务面板
    ├─conf
    │  └─example.vmoptions           #普通服务默认vm参数配置
    │  └─nacos.vmoptions             #Nacos的vm参数配置
@@ -150,3 +150,66 @@ $ curl http://localhost:9901/api/order/demo/hello
 
 ![sentinel-dashboard](doc/sentinel-dashboard.png)
 
+## 配置解读（Setting unscramble）
+接下来对重要对配置文件进行解读。（en: Next, the important configuration files are interpreted.）
+### 服务启动配置文件——boot.properties（Service starter setting file）
+<code>boot.properties</code>文件一个服务对启动配置文件，配置定义了使用哪个jar文件启动、vm options、传入参数、指定对工作路径、指定对jdk、指定的环境变量等信息。
+
+Nacos等启动配置文件如<code>nacos-server-1</code>/<code>boot.properties</code>
+```properties
+#Properties file Jarboot created.
+#Sat Jul 17 18:43:23 CST 2021
+daemon=true
+# 这里三个nacos服务共用一个vm配置文件，支持绝对和相对路径
+vm=../conf/nacos.vmoptions
+jarUpdateWatch=true
+# nacos服务等启动jar文件，支持绝对和相对路径，此处使用相对路径共用一个
+jar=../bin/nacos-server.jar
+jdkPath=
+env=
+#传入参数，3个nacos服务使用--server.port指定端口号
+args=--nacos.inetutils.ip-address\=127.0.0.1 --server.port\=8848 --spring.config.additional-location\=./conf --logging.config\=../conf/nacos-logback.xml 
+workDirectory=
+#启动优先级，指定10为目前最高等，优先启动
+priority=10
+```
+这里使用<code>--server.port=8848</code>指定启动的端口号，3个nacos服务依次为8848、8858、8868。
+
+### vm options配置文件（vm options setting file）
+上述<code>boot.properties</code>文件中可以指定一个vm options的配置文件，此文件默认是服务的目录下的<code>boot.vmoptions</code>文件。
+
+也可以自定义位置，可以是绝对路径，也可以是相对于服务目录的相对路径。
+
+Nacos的vm options配置文件<code>nacos.vmoptions</code>如下：
+```
+-Dloader.path=../plugins/health,../plugins/cmdb
+-Dnacos.home=./
+-Dnacos.member.list=127.0.0.1:8848,127.0.0.1:8858,127.0.0.1:8868
+-DembeddedStorage=true
+-server
+-Xms512m
+-Xmx512m
+-Xmn128m
+-XX:MetaspaceSize=128m
+-XX:MaxMetaspaceSize=128m
+-XX:-OmitStackTraceInFastThrow
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=./java_heapdump.hprof
+```
+其中内存部分可以根据自身的实力调整，自己的电脑内存小特意调小了些。这里使用vm参数指定了<code>Nacos集群</code>的节点列表：
+
+<code>-Dnacos.member.list=127.0.0.1:8848,127.0.0.1:8858,127.0.0.1:8868</code>
+
+使用<code>-Dnacos.home=./</code>指定工作路径文件当前路径，即为对应的服务目录。
+
+<code>stock-server</code>、<code>order-server</code>和<code>api-gateway</code>共用一个vm配置文件：<code>example.vmoptions</code>
+```
+-Dsentinel.host=127.0.0.1:10000
+-Xms128m
+-Xmx128m
+-XX:-OmitStackTraceInFastThrow
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=./java_heapdump.hprof
+```
+这里使用<code>-Dsentinel.host=127.0.0.1:10000</code>指定<code>sentinel</code>的地址和端口。
+这个几个服务只是示例，没有业务逻辑，因此分配了较少的内存。
