@@ -6,6 +6,7 @@
 .idea
 .vscode
 target
+dist/services/bin
 dist/services/nacos-server-*/conf
 dist/services/nacos-server-*/logs
 dist/services/nacos-server-*/data
