@@ -66,7 +66,7 @@ And then there are LVS, DNS, etc. you can download the project and test it by yo
   ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 
-⭐ 简略调用流程（Brief call process） ✨
+🍏  简略调用流程（Brief call process） ✨
 
    http客户端    ——▶     网关服务集群     ——▶     订单服务集群    ——▶    库存服务集群
 ╭──────────────╮       ╭────────────────╮      ╭───────────────╮      ╭───────────────╮
@@ -151,10 +151,10 @@ $ sh startup.sh
 
 的顺序，依次启动集群服务。Nacos集群模式启动成功后如下图所示：
 
-![nacos-started](doc/nacos-started.png)
+![nacos-started](https://gitee.com/majz0908/jarboot-with-spring-cloud-alibaba-example/raw/main/doc/nacos-started.png)
 
 #### 打开Nacos管理界面如下
-![nacos-cluster](doc/nacos-cluster.png)
+![nacos-cluster](https://gitee.com/majz0908/jarboot-with-spring-cloud-alibaba-example/raw/main/doc/nacos-cluster.png)
 
 ### 步骤4（Step 4）：调用测试接口API（Execute test API）
 执行如下Http接口，将会经过<code>api-gateway</code> ➡️ <code>order-server</code> ➡️ <code>stock-server</code>
@@ -164,7 +164,7 @@ $ curl http://localhost:9901/api/order/demo/hello
 ```
 打开<code>Alibaba Sentinel</code>的管理界面，可看到调用的过程，如下图：
 
-![sentinel-dashboard](doc/sentinel-dashboard.png)
+![sentinel-dashboard](https://gitee.com/majz0908/jarboot-with-spring-cloud-alibaba-example/raw/main/doc/sentinel-dashboard.png)
 
 ## 配置解读（Setting unscramble）
 接下来对重要对配置文件进行解读。（en: Next, the important configuration files are interpreted.）
@@ -228,4 +228,4 @@ Nacos的vm options配置文件<code>nacos.vmoptions</code>如下：
 -XX:HeapDumpPath=./java_heapdump.hprof
 ```
 这里使用<code>-Dsentinel.host=127.0.0.1:10000</code>指定<code>sentinel</code>的地址和端口。
-这个几个服务只是示例，没有业务逻辑，因此分配了较少的内存。
+这几个服务只是示例，没有业务逻辑，因此分配了较少的内存。
