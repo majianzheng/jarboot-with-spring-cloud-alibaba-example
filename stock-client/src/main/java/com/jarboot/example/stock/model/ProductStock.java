@@ -2,6 +2,9 @@ package com.jarboot.example.stock.model;
 
 import java.math.BigDecimal;
 
+/**
+ * @author jianzhengma
+ */
 public class ProductStock {
     private String id;
     private String name;
@@ -29,5 +32,14 @@ public class ProductStock {
 
     public void setQuantity(BigDecimal quantity) {
         this.quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductStock{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", quantity=" + quantity +
+                '}';
     }
 }

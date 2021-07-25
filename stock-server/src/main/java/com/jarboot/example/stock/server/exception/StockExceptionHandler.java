@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+/**
+ * @author jianzhengma
+ */
 @ControllerAdvice
 public class StockExceptionHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(StockExceptionHandler.class);

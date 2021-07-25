@@ -1,5 +1,5 @@
 # 使用Jarboot管理Spring Cloud Alibaba系列服务的示例。
-en: Use jarboot to manager spring cloud alibaba servers example
+en: Use jarboot to manager Spring Cloud Alibaba servers example
 
 [![CodeQL](https://github.com/majianzheng/jarboot-with-spring-cloud-alibaba-example/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/majianzheng/jarboot-with-spring-cloud-alibaba-example/actions/workflows/codeql-analysis.yml)
 ![GitHub](https://img.shields.io/github/license/majianzheng/jarboot-with-spring-cloud-alibaba-example)
@@ -11,7 +11,7 @@ en: Use jarboot to manager spring cloud alibaba servers example
 - 文档（Docs）：https://www.yuque.com/jarboot/usage/tmpomo
 
 该项目是一种典型使用场景的示例（仅作为学习交流使用），演示当前典型的分布式微服务系统如何使用Jarboot管理、启动。以<code>Spring Cloud Alibaba</code>系列为例，包括<code>Nacos</code>、<code>Alibaba Sentinel</code>
-<code>Spring cloud Gateway</code>等。（en: This project is an example of a typical use scenario, demonstrating how the current typical
+<code>Spring Cloud Gateway</code>等。（en: This project is an example of a typical use scenario, demonstrating how the current typical
  distributed micro-service system uses jarboot to manage and start. Take the spring cloud Alibaba series as an example, including Nacos and Alibaba sentinel
 Spring cloud gateway, etc.）
 
@@ -68,21 +68,21 @@ And then there are LVS, DNS, etc. you can download the project and test it by yo
 
 🍏  简略调用流程（Brief call process） ✨
 
-   http客户端    ——▶     网关服务集群     ——▶     订单服务集群    ——▶    库存服务集群
-╭──────────────╮       ╭────────────────╮      ╭───────────────╮      ╭───────────────╮
-│  http proxy  │       │   API Gateway  │      │ Order server  │      │ Stock server  │
-╰──────┬───────╯       ╰───────┬────────╯      ╰──────┬────────╯      ╰──────┬────────╯
-       │     http request      │                      │                      │
-       ├─────────────────────>╭┴╮    http requet      │                      │
-       │                      │ ├───────────────────>╭┴╮   feign rpc call   ╭┴╮
-       │                      │ │   load balancer    │ ├───────────────────>│ ├─╮
-       │                      │ │                    │ │                    │ │ │ 
-       │                      │ │                    │ │      response      │ │ │
-       │                      │ │     response       │ │<───────────────────┤ │<╯
-       │      response        │ │<───────────────────┤ │                    ╰┬╯
-       │<─────────────────────┤ │                    ╰┬╯                     │
-       │                      ╰┬╯                     │                      │
-       │                       │                      │                      │
+   http proxy    ——▶    网关服务集群     ——▶    订单服务集群    ——▶    库存服务集群
+╭──────────────╮      ╭────────────────╮      ╭──────────────╮      ╭──────────────╮
+│  http proxy  │      │   API Gateway  │      │ Order server │      │ Stock server │
+╰──────┬───────╯      ╰───────┬────────╯      ╰──────┬───────╯      ╰──────┬───────╯
+       │     http request     │                      │                     │
+       ├────────────────────>╭┴╮    http requet      │                     │
+       │                     │ ├───────────────────>╭┴╮   feign rpc call   │
+       │                     │ │   load balancer    │ ├──────────────────>╭┴╮
+       │                     │ │                    │ │                   │ ├─╮
+       │                     │ │                    │ │      response     │ │<╯
+       │                     │ │     response       │ │<──────────────────┤ │
+       │      response       │ │<───────────────────┤ │                   ╰┬╯
+       │<────────────────────┤ │                    ╰┬╯                    │
+       │                     ╰┬╯                     │                     │
+       │                      │                      │                     │
        
 ```
 ## 快速上手（Quick start）
@@ -169,7 +169,7 @@ $ curl http://localhost:9901/api/order/demo/hello
 ## 配置解读（Setting unscramble）
 接下来对重要对配置文件进行解读。（en: Next, the important configuration files are interpreted.）
 ### 服务启动配置文件——boot.properties（Service starter setting file）
-<code>boot.properties</code>文件一个服务对启动配置文件，配置定义了使用哪个jar文件启动、vm options、传入参数、指定对工作路径、指定对jdk、指定的环境变量等信息。
+<code>boot.properties</code>文件一个服务的启动配置文件，配置定义了使用哪个jar文件启动、vm options、传入参数、工作路径、指定的jdk路径、指定的环境变量等信息。
 
 Nacos等启动配置文件如<code>nacos-server-1</code>/<code>boot.properties</code>
 ```properties

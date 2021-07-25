@@ -4,39 +4,46 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.jarboot.example.stock.client.StockRpcClient;
 import com.jarboot.example.stock.model.ProductStock;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 
-@Api(tags="订单接口")
+/**
+ * @author jianzhengma
+ */
 @RequestMapping(value = "/order/demo")
-@Controller
+@RestController
 public class OrderController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private StockRpcClient stockRpcClient;
 
-    // Fallback 函数，函数签名与原函数一致或加一个 Throwable 类型的参数.
+    /**
+     * 快速失败
+     * @param s 输入
+     * @return 快速失败
+     */
     public String helloFallback(long s) {
         logger.debug("Order helloFallback >>>>>");
         return String.format("Fallback %d", s);
     }
 
-    // Block 异常处理函数，参数最后多一个 BlockException，其余与原函数一致.
+    /**
+     * Block 异常处理函数，参数最后多一个 BlockException，其余与原函数一致.
+     * @param s 输入
+     * @param ex 异常
+     * @return 结果
+     */
     public String exceptionHandler(long s, BlockException ex) {
         logger.debug("Order s: {}", s);
         logger.debug(ex.getMessage(), ex);
         return "Oops, error occurred at " + s;
     }
 
-    @ApiOperation(value = "Hello", httpMethod = "GET")
     @SentinelResource(value = "order-hello", blockHandler = "exceptionHandler", fallback = "helloFallback")
     @GetMapping("hello")
     @ResponseBody
@@ -47,7 +54,6 @@ public class OrderController {
         return "Stock resp: " + resp;
     }
 
-    @ApiOperation(value = "创建订单", httpMethod = "POST")
     @PostMapping
     @SentinelResource
     @ResponseBody
@@ -69,7 +75,6 @@ public class OrderController {
         return "ok, quantity = " + quantity;
     }
 
-    @ApiOperation(value = "完成订单", httpMethod = "PUT")
     @PutMapping
     @SentinelResource
     @ResponseBody
@@ -82,14 +87,13 @@ public class OrderController {
         }
         BigDecimal quantity = productStock.getQuantity();
         if (null != quantity) {
-            productStock.setQuantity(quantity.add(new BigDecimal(-1.0)));
+            productStock.setQuantity(quantity.add(BigDecimal.valueOf(-1.0)));
         }
         stockRpcClient.updateProductInventory(productStock);
         logger.debug("finishOrder >>>");
         return "ok";
     }
 
-    @ApiOperation(value = "获取订单", httpMethod = "GET")
     @GetMapping
     @SentinelResource
     @ResponseBody
@@ -98,7 +102,6 @@ public class OrderController {
         return "ok";
     }
 
-    @ApiOperation(value = "作废订单", httpMethod = "DELETE")
     @DeleteMapping
     @SentinelResource
     @ResponseBody

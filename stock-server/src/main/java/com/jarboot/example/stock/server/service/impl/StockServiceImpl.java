@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 
+/**
+ * @author jianzhengma
+ */
 @RefreshScope
 @Service
 public class StockServiceImpl implements StockService {
@@ -27,13 +30,22 @@ public class StockServiceImpl implements StockService {
     @Value("${product-quantity:10000}")
     private BigDecimal quantity;
 
-    // Fallback 函数，函数签名与原函数一致或加一个 Throwable 类型的参数.
+    /**
+     * 快速失败
+     * @param s 输入
+     * @return 结果
+     */
     public String helloFallback(long s) {
         logger.debug("Stock helloFallback >>>>>");
         return String.format("Fallback %d", s);
     }
 
-    // Block 异常处理函数，参数最后多一个 BlockException，其余与原函数一致.
+    /**
+     * 异常时快速失败
+     * @param s 输入
+     * @param ex 异常
+     * @return 结果
+     */
     public String exceptionHandler(long s, BlockException ex) {
         logger.debug("Stock s: {}", s);
         logger.debug(ex.getMessage(), ex);

@@ -13,3 +13,4 @@ dist/services/nacos-server-*/data
 dist/services/nacos-server-*/status
 dist/services/nacos-server-*/work
 dependency-reduced-pom.xml
+.flattened-pom.xml
