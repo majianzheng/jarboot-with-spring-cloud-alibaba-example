@@ -8,7 +8,7 @@ en: Use jarboot to manager Spring Cloud Alibaba servers example
 <code>Jarboot</code> 是一个Java进程启动器，可以管理、监控及诊断一系列的Java进程。
 (en: Jarboot is a Java process starter，which can manage, monitor and debug a series of Java instance.)
 - <code>jarboot</code>: https://github.com/majianzheng/jarboot
-- 文档（Docs）：https://www.yuque.com/jarboot/usage/tmpomo
+- 文档（Docs）：https://www.yuque.com/jarboot/usage/quick-start
 
 该项目是一种典型使用场景的示例（仅作为学习交流使用），演示当前典型的分布式微服务系统如何使用Jarboot管理、启动。以<code>Spring Cloud Alibaba</code>系列为例，包括<code>Nacos</code>、<code>Alibaba Sentinel</code>
 <code>Spring Cloud Gateway</code>等。（en: This project is an example of a typical use scenario, demonstrating how the current typical
