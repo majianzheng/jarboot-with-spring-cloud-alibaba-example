@@ -18,7 +18,7 @@
     </modules>
     <properties>
         <revision>1.0.0-SNAPSHOT</revision>
-        <jarboot.version>1.0.6</jarboot.version>
+        <jarboot.version>1.0.8</jarboot.version>
         <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -72,6 +72,11 @@
                 <groupId>${project.groupId}</groupId>
                 <artifactId>stock-client</artifactId>
                 <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.majianzheng</groupId>
+                <artifactId>spring-boot-starter-jarboot</artifactId>
+                <version>${jarboot.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

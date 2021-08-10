@@ -1,6 +1,7 @@
 -Dsentinel.host=127.0.0.1:10000
 -Xms128m
 -Xmx128m
+-Dstart.determine.time=15000
 -XX:-OmitStackTraceInFastThrow
 -XX:+HeapDumpOnOutOfMemoryError
 -XX:HeapDumpPath=./java_heapdump.hprof

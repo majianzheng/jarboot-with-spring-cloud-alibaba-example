@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: stock-server
+  jarboot:
+    failed-auto-exit: true
   cloud:
     nacos:
       config:

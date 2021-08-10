@@ -59,6 +59,10 @@
 			<groupId>com.jarboot.example</groupId>
 			<artifactId>stock-client</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>io.github.majianzheng</groupId>
+			<artifactId>spring-boot-starter-jarboot</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
