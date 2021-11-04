@@ -1,7 +1,7 @@
 -Dloader.path=../plugins/health,../plugins/cmdb
 -Dnacos.home=./
-#-Dnacos.standalone=true
--Dnacos.member.list=127.0.0.1:8848,127.0.0.1:8858,127.0.0.1:8868
+-Dnacos.standalone=true
+#-Dnacos.member.list=127.0.0.1:8848,127.0.0.1:8858,127.0.0.1:8868
 -DembeddedStorage=true
 #会等待没有日志输出的30秒后判定为启动完成
 -Dstart.determine.time=30000
