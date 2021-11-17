@@ -15,6 +15,13 @@ en: Use jarboot to manager Spring Cloud Alibaba servers example
  distributed micro-service system uses jarboot to manage and start. Take the spring cloud Alibaba series as an example, including Nacos and Alibaba sentinel
 Spring cloud gateway, etc.）
 
+## 完整示例下载：
+示例包含了Spring Cloud的典型服务（业务服务、API网关）、Nacos、Sentinel、Seata等。
+由于是完整的可运行环境，文件较大放在了网盘中，下载后解压即可用，注意Windows环境下Seata的服务配置依照压缩包中的图片提示修改配置。
+- 阿里云盘：https://www.aliyundrive.com/s/3oAWkRZgDtr
+- 百度网盘: https://pan.baidu.com/s/1PvIIZP5LXjEJAM5uj4ye4w
+  提取码: 8yh5
+
 ## 架构（Architecture）
 该项目代码部分包括API网关、示例服务提供者：订单服务和库存服务，演示从API网关进入系统后等调用链路。真实场景下往上还有Tengine、Nginx等
 ，再往上还有LVS、DNS等，可下载项目后自行集成测试。（en: The code part of the project includes API gateway, sample service provider:
