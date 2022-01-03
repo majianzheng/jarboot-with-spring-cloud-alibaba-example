@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * @author jianzhengma
  */
-@FeignClient(value = "stock-server")
-@RequestMapping(value = "/stock/demo")
+@FeignClient(value = "stock-server", path = "/stock/demo")
 public interface StockRpcClient {
     /**
      * 测试接口hello
